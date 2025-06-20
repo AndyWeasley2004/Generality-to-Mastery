@@ -1,0 +1,42 @@
+device: cuda:0
+pretrained_optim_path: 
+pretrained_param_path: 
+inference_param_path:  ./score_ckpt/top5_selected_pretrain/params/ep042_loss0.316_params.pt
+# [1, 3, 5, 7, 9]
+
+model:
+  use_adapter: False
+  adapter_positions:
+  d_word_embed: 512
+  pre_lnorm: True
+  attn_type: mha
+  decoder:
+    n_layer: 12
+    n_head: 8
+    d_model: 512
+    d_ff: 2048
+    dropout: 0.1
+    mem_len: 0
+    tgt_len: 2400
+
+data:
+  data_dir: ../score_data/full/finetune_top5_selected_new/
+  vocab_path: ../score_data/dictionary.pkl
+  batch_size: 4
+  from_start_only: False
+
+training:
+  trained_steps: 0
+  trained_epochs: 0
+  warmup_steps: 500
+  lr_decay_steps: 500000
+  max_lr: 1.0e-4
+  min_lr: 1.0e-5
+  max_epoch: 50
+  val_interval: 1
+  log_interval: 100
+  accum_steps: 1
+
+output:
+    ckpt_dir: score_ckpt/composer_scratch
+    ckpt_interval: 2

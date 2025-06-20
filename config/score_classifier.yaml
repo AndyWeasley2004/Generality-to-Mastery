@@ -1,0 +1,40 @@
+device: cuda:1
+pretrained_optim_path: 
+pretrained_param_path:
+inference_param_path:  ./eval_ckpt/huggingface_classifier/ep014_loss0.462_params.pt
+
+model:
+  use_adapter: False
+  adapter_positions:
+  d_word_embed: 512
+  pre_lnorm: True
+  attn_type: mha
+  encoder:
+    n_layer: 6
+    n_head: 8
+    d_model: 512
+    d_ff: 2048
+    dropout: 0.1
+    tgt_len: 2400
+
+data:
+  data_dir: ../score_data/huggingface_data/
+  vocab_path: ../score_data/dictionary.pkl
+  batch_size: 8
+  from_start_only: False
+
+training:
+  trained_steps: 0
+  trained_epochs: 0
+  warmup_steps: 500
+  lr_decay_steps: 500000
+  max_lr: 1.0e-4
+  min_lr: 1.0e-5
+  max_epoch: 35
+  val_interval: 1
+  log_interval: 100
+  accum_steps: 1
+
+output:
+    ckpt_dir: eval_ckpt/huggingface_classifier
+    ckpt_interval: 2

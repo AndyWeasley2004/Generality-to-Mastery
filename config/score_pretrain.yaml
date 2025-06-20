@@ -1,0 +1,38 @@
+device: cuda:0
+pretrained_optim_path: 
+pretrained_param_path: 
+inference_param_path:  ./score_ckpt/pretrain_score_small/params/ep120_loss0.672_params.pt
+
+model:
+  adapter_positions:
+  d_word_embed: 512
+  pre_lnorm: True
+  attn_type: mha
+  decoder:
+    n_layer: 12
+    n_head: 8
+    d_model: 512
+    d_ff: 2048
+    dropout: 0.1
+    tgt_len: 2400
+
+data:
+  data_dir: ../score_data/full/pretrain_score/
+  vocab_path: ../score_data/dictionary.pkl
+  batch_size: 4
+  from_start_only: False
+
+training:
+  trained_epochs: 0
+  warmup_steps: 1000
+  lr_decay_steps: 500000
+  max_lr: 1.0e-4
+  min_lr: 1.0e-5
+  max_epoch: 200
+  val_interval: 1
+  log_interval: 100
+  accum_steps: 2
+
+output:
+    ckpt_dir: ./score_ckpt/pretrain_score/
+    ckpt_interval: 5
