@@ -2,54 +2,20 @@
 
 ## Convert MIDI to events
 
-### EMOPIA
-1. Create folder `midi_data` in the root directory.
-2. Download and unzip [EMOPIA+](https://zenodo.org/records/13122742) in the `midi_data` folder.
-3. Three conversion types are needed for different generation stages with functional representation (`--representation=functional`) or REMI (`--representation=remi`).
+### Dataset
+1. Download and unzip [pretrain_score]([https://zenodo.org/records/13122742](https://huggingface.co/Itsuki-music/Generality_to_Mastery/blob/main/full/pretrain_score.zip)) and [finetune score from target composers](https://huggingface.co/Itsuki-music/Generality_to_Mastery/blob/main/full/finetune_top4_selected_new.zip); you may rename the directory
+2. Update the `data_root`, `event_root` and `add_composer` in the `midi2events_score.py` with your midi data path, desired output event path, and whether to add actual composer token instead of putting `Composer_None` (`add_composer=True` for fine-tuning dataset and `False` for pre-training dataset)
+3. The pipeline handles the multi-genres file structure already for one corpus with multiple-style data. You can run the script as follows
 ```angular2html
-# functional representation for lead sheet generation
-python3 representations/midi2events_emopia.py --representation=functional --event_type=lead
-
-# functional representation for performance generation conditioned on lead sheet
-python3 representations/midi2events_emopia.py --representation=functional --event_type=lead2full
-
-# functional representation for performance generation from scratch
-python3 representations/midi2events_emopia.py --representation=functional --event_type=full
-```
-
-### HookTheory
-1. Create folder `HookTheory` in the `midi_data` folder.
-2. Download [JSON](https://sheetsage.s3.amazonaws.com/hooktheory/Hooktheory.json.gz) data released in [SheetSage](https://github.com/chrisdonahue/sheetsage) and put it into `midi_data/HookTheory/`. 
-3. Convert MIDI to lead sheet with functional representation (`--representation=functional`) or REMI (`--representation=remi`)
-```angular2html
-# functional representation for lead sheet generation
-python3 representations/midi2events_hooktheory.py --representation=functional 
-```
-
-### Pop1k7
-1. Download and unzip [Pop1K7-emo](https://zenodo.org/records/13167761) in the `midi_data` folder.
-2. Put processed dataset [pop1k7_leedsheet2midi](https://huggingface.co/slseanwu/compose-and-embellish-pop1k7/tree/main/datasets/stage02_embellish) provided by [Compose & Embellish](https://github.com/slSeanWU/Compose_and_Embellish) into `midi_data/Pop1K7-emo`.
-1. Two conversion types are needed for different generation stages with functional representation (`--representation=functional`) or REMI (`--representation=remi`).
-```angular2html
-# functional representation for performance generation conditioned on lead sheet
-python3 representations/midi2events_pop1k7.py --representation=functional --event_type=lead2full
-
-# functional representation for performance generation from scratch
-python3 representations/midi2events_pop1k7.py --representation=functional --event_type=full
+python midi2events_score.py
 ```
 
 ## Build Vocabulary
+We provide a dummy option for performnace representation using `note_on`, `note_off` and `time_shift` tokens, but our work focuses on symbolic music, so please build vocabulary as follows.
 ```angular2html
-# functional representation
-python3 representations/events2words.py --representation=functional
-
-# REMI representation
-python3 representations/events2words.py --representation=remi
+python events2words.py --type score
 ```
 
 ## Data splits
-For EMOPIA and HookTheory, run the following command. For Pop1k7, please refer to [Compose & Embellish](https://github.com/slSeanWU/Compose_and_Embellish).
-```angular2html
-python3 representations/data_splits.py
-```
+Please refer to details in [training script](https://github.com/AndyWeasley2004/Generality-to-Mastery/blob/main/train_score.py) and [dataset interface](https://github.com/AndyWeasley2004/Generality-to-Mastery/blob/main/dataloader.py) for the train-validation split. We employ a stratified split with a fixed validation ratio using a random seed, which ensures both reproducibility and randomness.
 
