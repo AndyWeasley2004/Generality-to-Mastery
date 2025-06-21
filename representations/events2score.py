@@ -1,7 +1,10 @@
 from miditoolkit import MidiFile, Instrument, Note, TempoChange, TimeSignature
 import os
 from tqdm import tqdm
-from utils import pickle_load
+import pickle5 as pickle
+
+def pickle_load(f):
+    return pickle.load(open(f, 'rb'))
 
 def get_bar_parameters(ts_token_value, ticks_per_beat=480):
     num_str, denom_str = ts_token_value.split('/')

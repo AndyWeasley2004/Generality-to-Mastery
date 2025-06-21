@@ -1,9 +1,6 @@
 import sys
 import os
-import random
-from collections import Counter
 import argparse
-import pickle
 import yaml
 import torch
 import shutil
@@ -13,7 +10,6 @@ from model.vanilla_transformer import VanillaTransformer
 from events2score import convert_sequence_to_midi
 from utils import pickle_load
 from inference_utils import generate_events
-import random
 
 sys.path.append('./model/')
 sys.path.append('./')

@@ -5,7 +5,6 @@ from torch.utils.data import Dataset, DataLoader
 from glob import glob
 import pickle
 from model.vanilla_encoder import ComposerClassifier
-from dataloader import MusicSegmentDataset
 import matplotlib.pyplot as plt
 import argparse
 import yaml

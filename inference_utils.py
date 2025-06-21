@@ -1,10 +1,8 @@
 import time
-
 import scipy
 import torch
 import numpy as np
 from utils import tensor_to_numpy
-
 
 # sampling utilities
 def temperature(logits, temperature):
