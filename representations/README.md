@@ -9,6 +9,10 @@
 ```angular2html
 python midi2events_score.py
 ```
+4. You can also reconstruct the events back to MIDI files to check the quality. To do the reconstruction, adjust the `dataset` and `data_root` in `events2score.py` with produced events directory and path you want to store reconstructed MIDIs. It's also simple to run the script.
+```angular2html
+python events2score.py
+```
 
 ## Build Vocabulary
 We provide a dummy option for performnace representation using `note_on`, `note_off` and `time_shift` tokens, but our work focuses on symbolic music, so please build vocabulary as follows.

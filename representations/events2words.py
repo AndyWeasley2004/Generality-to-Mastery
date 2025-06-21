@@ -65,32 +65,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
     representation = args.type 
 
-    # ======== stage-one for two-stage models ========#
-    events_dir = '../performance_data/full/pretrain_new'
-    # events_dir = '../score_data/full/pretrain_score/'
+    # events_dir = '../performance_data/full/pretrain_new'
+    events_dir = '../score_data/full/pretrain_score/'
     print(events_dir)
     events2dictionary(events_dir, representation=representation, event_pos=1)
-
-    # events_dir = 'events/stage1/emopia_events/lead_sheet_chord11_{}'.format(representation)
-    # print(events_dir)
-    # events2dictionary(events_dir, add_velocity=False, add_emotion=True, add_tempo=False,
-    #                   num_emotion=2, relative=relative, event_pos=1)
-
-    # # ======== stage-two for two-stage models ========#
-    # events_dir = '../dataset/embellish/classical_all_{}'.format(representation)
-    # print(events_dir)
-    # events2dictionary(events_dir, add_velocity=False, add_tempo=False, relative=relative, event_pos=2)
-
-    # print(events_dir)
-    # events2dictionary(events_dir, add_velocity=False, add_emotion=True, add_tempo=True,
-    #                   num_emotion=4, relative=relative, event_pos=2)
-
-    # # ======== one-stage models ========#
-    # print(events_dir)
-    # events2dictionary(events_dir, add_velocity=True, add_emotion=True, add_tempo=True,
-    #                   num_emotion=4, relative=relative, event_pos=1)
-
-    # events_dir = 'events/stage1/emopia_events/full_song_chord11_{}'.format(representation)
-    # print(events_dir)
-    # events2dictionary(events_dir, add_velocity=True, add_emotion=True, add_tempo=True,
-    #                   num_emotion=4, relative=relative, event_pos=1)
