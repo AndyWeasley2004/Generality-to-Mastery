@@ -2,7 +2,7 @@
 
 This is the official repository of the AIMC 2025 paper "From Generality to Mastery: Composer-Style Symbolic Music Generation via Large-Scale Pre-training."
 
-[Paper]() | [Demo page](https://generality-mastery.github.io/) | [Model weights & Dataset](https://huggingface.co/Itsuki-music/Generality_to_Mastery)
+[Paper](https://arxiv.org/abs/2506.17497) | [Demo page](https://generality-mastery.github.io/) | [Model weights & Dataset](https://huggingface.co/Itsuki-music/Generality_to_Mastery)
 
 ## Environment
 * **Python 3.8** recommended
